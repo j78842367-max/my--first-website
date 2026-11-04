@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>بيت رعب جومانا 👻</title>
+<style>
+body{margin:0;background:#000;color:#fff;font-family:Arial;text-align:center;overflow:hidden}
+#game{max-width:500px;margin:auto;padding:20px}
+h1{color:#ff0066;text-shadow:0 0 15px red}
+.room{background:#111;border:2px solid #444;border-radius:15px;padding:20px;margin:15px 0;min-height:220px}
+button{background:#ff0066;color:#fff;border:none;padding:12px 20px;border-radius:10px;font-size:18px;margin:5px;cursor:pointer}
+button:hover{background:#c4004f}
+#ghost{font-size:100px;display:none}
+#msg{font-size:20px;margin:15px}
+.keys{color:#ffd700}
+</style>
+</head>
+<body>
+<div id="game">
+<h1>🏚️ بيت رعب جومانا 👻</h1>
+<p>دخلتي البيت عشان ترجعي لعبة أختك.. لازم تجمعي 3 مفاتيح قبل الساعة 12!</p>
+<p class="keys">🔑 المفاتيح: <span id="keys">0</span> / 3</p>
+<div class="room" id="room">
+<div id="ghost">👻</div>
+<div id="msg">انتي في الاستقبال المظلم... سامعة صوت خطوات؟<br>دوسي على حاجة عشان تدوري</div>
+<div id="btns">
+<button onclick="check('كنبة')">🛋️ دوري تحت الكنبة</button>
+<button onclick="check('لوحة')">🖼️ دوري ورا اللوحة</button>
+<button onclick="check('باب')">🚪 جربي تفتحي الباب</button>
+</div>
+</div>
+<button onclick="location.reload()">🔄 العبي من الأول</button>
+<p style="font-size:12px;color:#888">Made by Jomana - Web & App Developer</p>
+</div>
+<script>
+let k=0;
+function check(place){
+let msg=document.getElementById('msg');
+let ghost=document.getElementById('ghost');
+let keys=document.getElementById('keys');
+if(place==='لوحة' && k===0){
+k=1; keys.innerText=k;
+msg.innerHTML='لقيتي المفتاح الأول! 🔑 برافو! كملي.. روحي الأوضة التانية';
+document.getElementById('btns').innerHTML='<button onclick="room2()">🚪 ادخلي أوضة النوم</button>';
+} else if(place==='كنبة'){
+ghost.style.display='block';
+msg.innerHTML='ااااه!! شبح!! 👻👻 اهربي بسرعة!';
+setTimeout(()=>{ghost.style.display='none'; msg.innerHTML='الحمدلله هرب.. جربي مكان تاني';},1500);
+} else if(place==='باب'){
+msg.innerHTML='الباب مقفول! محتاجة 3 مفاتيح عشان تفتحيه';
+} else {
+msg.innerHTML='مفيش حاجة هنا.. جربي مكان تاني';
+}
+}
+function room2(){
+let msg=document.getElementById('msg');
+msg.innerHTML='انتي في أوضة النوم.. الدولاب بيتحرك لوحده! 😱<br>هتفتحيه ولا هتهربي؟';
+document.getElementById('btns').innerHTML='<button onclick="win()">🗄️ افتحي الدولاب</button><button onclick="lose()">🏃 اهربي</button>';
+}
+function win(){
+document.getElementById('msg').innerHTML='لقيتي المفتاح التاني والتالت مع بعض! 🎉🎉<br>خرجتي من البيت! انتي بطلة يا جومانا! 🏆<br>استني الجزء التاني قريب...';
+document.getElementById('btns').innerHTML='<button onclick="location.reload()">العبى تاني</button>';
+}
+function lose(){
+document.getElementById('msg').innerHTML='الشبح مسكك! 👻 Game Over';
+document.getElementById('btns').innerHTML='<button onclick="location.reload()">حاولي تاني</button>';
+}
+</script>
+</body>
+</html>
